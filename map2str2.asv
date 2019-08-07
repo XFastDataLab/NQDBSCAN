@@ -1,0 +1,59 @@
+#include "mex.h"
+#include "math.h"
+#include "string.h"
+#include "stdio.h"
+#include "stdlib.h"
+
+
+/*
+ * This function is used to map a vector to a string.
+ * For example [1 2 3]-> 'id#1#2#3'
+ * 
+ */ 
+void mexFunction( int nlhs, mxArray *plhs[],
+        int nrhs, const mxArray *prhs[] )
+{       
+    int mrows,ncols,i,j,val,pos;
+    double *points,eps;
+    size_t buflen;
+    mxArray *rs;
+    char* gridStr;
+    char tmp1[100];
+    char tmp2[100];
+    char tmpCom[1];   
+    
+        int mrows,ncols,i,j,val,pos,nonEmptyGridCounter;
+    double *points;
+    size_t buflen;
+    mxArray *gridIndex,*gridStrings, *uniGrids;
+    double *gridIndexPtr,*uniGridsPtr;
+    
+    char* gridStr;
+    
+    
+    strcpy(tmp1,"");
+    strcpy(tmp2,"");
+	strcat(tmp1,"#");
+            
+    /* The input must be a noncomplex scalar double.*/
+    mrows = mxGetM(prhs[0]);    
+    ncols = mxGetN(prhs[0]);    
+    
+    gridStr=mxCalloc(100*mrows, sizeof(char));
+    
+    /* Create matrix for the return argument. */ 
+    rs = mxCreateCellMatrix(1,mrows);  
+    points = mxGetPr(prhs[0]); 
+    for (i=0; i<mrows;i++){
+        strcpy(gridStr,"");
+        for (j=0; j<ncols;j++){
+            val=*(points+j* mrows+i);
+			itoa(val,tmp2,10);
+            strcat(gridStr,tmp1);
+            strcat(gridStr,tmp2);            
+        }    		
+        mxSetCell(rs, i, mxCreateString(gridStr));  
+    }
+    plhs[0] = rs;
+    return;
+}
