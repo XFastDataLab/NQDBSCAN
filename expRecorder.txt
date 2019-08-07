@@ -1,0 +1,32 @@
+1. exp on cube data 5 dim
+     a=stripsDATA_n_10w_dim_5;
+     gridSets_a_10=createGridsSets(a,10,200,100);
+     timer_a=testDBSCAN_bi(a,gridSets_a_10,2000,10) 
+
+2. exp on blogdata 
+     gridsBlog_Sets_10=createGridsSets(blogData_norm_59dim,10,100,100);
+     timer=testDBSCAN_bi(blogData_norm_59dim,gridsBlog_Sets_10,100,10)
+
+3. exp on sphere 5dim 20000
+     a=n_200000_dim_5
+     gridSets_a_10=createGridsSets(a,10,300,100);   
+     timer_a=testDBSCAN_bi(a,gridSets_a_10,2000,10)
+
+4. exp on sphere 20dim 20000
+   a20=floor(n_200000_dim_20(1:160000,:));
+   gridSets_a20_8=createGridsSets(a20,8,300,500);
+   timer=testDBSCAN_bi(a20,gridSets_a20_8,1000,20);
+
+5. exp on cube 10dim 10000
+   a=stripsDATA_n_10w_dim_20(:,1:10);
+   gridSets_a_10=createGridsSets(a,10,200,100);
+   timer=testDBSCAN_bi(a,gridSets_a_10,1000,20)
+
+6.exp on reaction network
+  gridSets_tmp_10=createGridsSets(reaction_network_norm_int,10);
+  tmp3=reaction_network_norm_int;
+  testDBSCAN_bi_Reacttion_Network
+
+7.exp on kdd04_norm
+  gridSets_kdd_5=createGridsSets(kdd04_norm,5,3000,300);
+  testDBSCAN_bi_kdd04
